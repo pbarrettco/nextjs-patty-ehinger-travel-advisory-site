@@ -1,0 +1,60 @@
+@use './fonts.scss';
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: var(--linen);
+    z-index: 50;
+    padding: 15px;
+
+    @media screen and (min-width: 769px) {
+        padding: 20px 30px;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    h1 a {
+        display: block;
+        text-indent: -9999em;
+        width: 250px;
+        height: 26px;
+        background-color: var(--espresso);
+        mask: url('/patty-ehinger_logo.svg') no-repeat center center;
+        mask-size: contain;
+
+        @media screen and (min-width: 769px) {
+            width: 263px;
+            height: 27px;
+        }
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    nav a {
+        color: var(--espresso);
+        @extend .utility;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+        transition: text-decoration-color .1s ease;
+
+        &:hover {
+            text-decoration-color: var(--espresso);
+            transition: text-decoration-color .3s ease;
+        }
+    }
+
+
+}

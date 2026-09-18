@@ -1,0 +1,111 @@
+/* aime */
+
+@font-face {
+    font-family: 'aime';
+    src: url('/webfonts/aime-trial_light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'aime';
+    src: url('/webfonts/aime-trial_light-italic.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* cera-pro */
+
+@font-face {
+    font-family: 'cera-pro';
+    src: url('/webfonts/cera-pro-trial_light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'cera-pro';
+    src: url('/webfonts/cera-pro-trial_regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'cera-pro';
+    src: url('/webfonts/cera-pro-trial_medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'cera-pro';
+    src: url('/webfonts/cera-pro-trial_bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+.oversized {
+    font-family: var(--font-aime);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 2.5rem;
+    line-height: 1;
+    letter-spacing: -.03em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @media screen and (min-width: 769px) {
+        font-size: 3.33rem;
+    }
+}
+
+.header {
+    font-family: var(--font-aime);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.625rem;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @media screen and (min-width: 769px) {
+        font-size: 2rem;
+    }
+}
+
+.eyebrow {
+    font-family: var(--font-cera);
+    font-weight: 500;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: .75rem;
+    letter-spacing: .2em;
+
+    @media screen and (min-width: 769px) {
+        font-size: .8125rem;
+    }
+}
+
+.legal {
+    font-family: var(--font-cera);
+    font-weight: 500;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: .6875rem;
+    letter-spacing: .2em;
+}
+
+.utility {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+}

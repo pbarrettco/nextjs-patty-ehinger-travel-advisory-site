@@ -1,0 +1,15 @@
+:root {
+    --cotton: #FFFEF1;
+    --linen: #FAF8E8;
+    --espresso: #44251F;
+    --poppy: #B94E25;
+
+    --font-aime: 'aime', Georgia, 'Times New Roman', serif;
+    --font-cera: 'cera-pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.desktop {
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
