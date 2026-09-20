@@ -3,6 +3,7 @@ import { type SanityDocument } from "next-sanity";
 import { client } from "./sanity/client";
 import { urlFor } from "./sanity/image";
 import TeamGrid, { type TeamMember } from "@/components/TeamGrid";
+import SocialFeed from "@/components/SocialFeed";
 
 const POSTS_QUERY = `*[
   _type == "bio"
@@ -68,15 +69,9 @@ export default async function IndexPage() {
       <section id="social">
         <div>
           <h2>The latest from our feed</h2>
-          <a href="#" target="_blank" rel="noopener noreferrer">@pattyehingertravel</a>
+          <a href="https://www.instagram.com/pattyehingertravel/" target="_blank" rel="noopener noreferrer">@pattyehingertravel</a>
         </div>
-          <ul>
-            <li>&nbsp;</li>
-            <li>&nbsp;</li>
-            <li>&nbsp;</li>
-            <li>&nbsp;</li>
-            <li className="desktop">&nbsp;</li>
-          </ul>
+        <SocialFeed />
       </section>
     </main>
   );

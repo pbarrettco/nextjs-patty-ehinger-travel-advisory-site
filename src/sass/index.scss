@@ -189,11 +189,12 @@ section#our-team {
             }
             h3 {
                 @extend .utility;
+                font-weight: 600;
                 margin-top: .5rem;
+
             }
             p {
                 @extend .utility;
-                font-weight: 400;
             }
             p.link-text {
                 margin-top: .25rem;
@@ -289,12 +290,26 @@ section#social {
 
         li {
             display: block;
-            background-color: #707070;
+            background-color: rgba(0, 0, 0, .15);
             aspect-ratio: 1/1.25;
             width: calc(calc(100% - 1rem) / 2);
+            position: relative;
+            overflow: hidden;
 
             @media screen and (min-width: 769px) {
                 width: calc(calc(100% - 4rem) / 5);
+            }
+
+            > a {
+                display: block;
+                position: absolute;
+                inset: 0;
+            }
+
+            img {
+                // Posts are square or 4:5; the tile is 1:1.25, so crop.
+                object-fit: cover;
+                object-position: center;
             }
         }
     }
