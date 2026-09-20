@@ -29,6 +29,11 @@ body {
     background-color: var(--linen);
 }
 
+main {
+    // Pulls #hero up under the sticky header so the header floats over it.
+    margin-top: calc(var(--header-h) * -1);
+}
+
 section {
     display: block;
     width: 100%;
@@ -37,6 +42,12 @@ section {
     @media screen and (min-width: 769px) {
         padding: 0 30px;
     }
+}
+
+// Keep hash-link targets clear of the sticky header. Applied to every
+// identified section so a future nav target inherits the offset for free.
+section[id] {
+    scroll-margin-top: var(--header-h);
 }
 
 h1, h2, h3, h4, h5, h6, p {

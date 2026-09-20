@@ -8,12 +8,24 @@ header {
     width: 100%;
     position: sticky;
     top: 0;
-    background-color: var(--linen);
     z-index: 50;
     padding: 15px;
+    background-color: transparent;
+    // Hoisted out of .active/.hidden so transitions back to the classless
+    // transparent state animate too, not just transitions into a class.
+    transition: top .3s ease, background-color .3s ease;
 
     @media screen and (min-width: 769px) {
         padding: 20px 30px;
+    }
+
+    &.active {
+        top: 0;
+        background-color: var(--linen);
+    }
+
+    &.hidden {
+        top: calc(var(--header-h) * -1);
     }
 
     h1 {
@@ -25,9 +37,11 @@ header {
         text-indent: -9999em;
         width: 250px;
         height: 26px;
-        background-color: var(--espresso);
+        // Classless default: over the hero photo, matching its cotton copy.
+        background-color: var(--cotton);
         mask: url('/patty-ehinger_logo.svg') no-repeat center center;
         mask-size: contain;
+        transition: background-color .3s ease;
 
         @media screen and (min-width: 769px) {
             width: 263px;
@@ -42,19 +56,43 @@ header {
     }
 
     nav a {
-        color: var(--espresso);
+        color: var(--cotton);
         @extend .utility;
         text-decoration: underline;
         text-decoration-color: transparent;
         text-decoration-thickness: 1.5px;
         text-underline-offset: 3px;
-        transition: text-decoration-color .1s ease;
+        transition: color .3s ease, text-decoration-color .1s ease;
 
         &:hover {
-            text-decoration-color: var(--espresso);
-            transition: text-decoration-color .3s ease;
+            text-decoration-color: var(--cotton);
+            transition: color .3s ease, text-decoration-color .3s ease;
         }
     }
 
+    // Both scrolled states sit on linen, so both take espresso. Applying it
+    // to .hidden as well means the header is already the right color when it
+    // slides back in as .active — no flash on return.
+    &.active,
+    &.hidden {
+        h1 a {
+            background-color: var(--espresso);
+        }
 
+        nav a {
+            color: var(--espresso);
+
+            &:hover {
+                text-decoration-color: var(--espresso);
+            }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    header,
+    header h1 a,
+    header nav a {
+        transition: none;
+    }
 }

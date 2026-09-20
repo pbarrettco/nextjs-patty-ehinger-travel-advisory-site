@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { type SanityDocument } from "next-sanity";
 
 import { client } from "./sanity/client";
 import { urlFor } from "./sanity/image";
+import TeamGrid, { type TeamMember } from "@/components/TeamGrid";
 
 const POSTS_QUERY = `*[
   _type == "bio"
@@ -23,6 +23,19 @@ const options = { next: {revalidate: 30 } };
 
 export default async function IndexPage() {
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+
+  // Flatten to plain serializable props so urlFor/@sanity/image-url stays
+  // out of the client bundle.
+  const members: TeamMember[] = posts.map((post) => ({
+    id: post._id,
+    name: post.name,
+    jobTitle: post.jobTitle,
+    bio: post.bio,
+    imageUrl: post.headshot?.asset
+      ? urlFor(post.headshot).width(646).height(810).fit("crop").url()
+      : null,
+    lqip: post.headshot?.asset?.metadata?.lqip ?? null,
+  }));
 
   return (
     <main>
@@ -46,25 +59,7 @@ export default async function IndexPage() {
           <h3>“I've spent years building this practice around a simple belief: that travel is one of the most meaningful ways we spend our time, and that planning it beautifully takes real care and expertise.</h3>
           <p>My team and I work with a limited number of clients so that every journey receives the attention it deserves, and everything we recommend is grounded in firsthand experience. We're constantly traveling ourselves, staying in the hotels we recommend, meeting the guides we rely on, and deepening the partner relationships that enable us to open doors for our clients, including our affiliation with Local Foreigner.” — Patty</p>
         </div>
-        <ul>
-        {posts.map((post) => (
-          <li key={post._id}>
-            {post.headshot?.asset && (
-              <Image
-                src={urlFor(post.headshot).width(646).height(810).fit("crop").url()}
-                alt={`${post.name} headshot`}
-                width={323}
-                height={405}
-                placeholder={post.headshot.asset.metadata?.lqip ? "blur" : "empty"}
-                blurDataURL={post.headshot.asset.metadata?.lqip}
-              />
-            )}
-            <h3>{post.name}</h3>
-            <p>{post.jobTitle}</p>
-            <p className="link-text">Read Bio</p>
-          </li>
-        ))}
-      </ul>
+        <TeamGrid members={members} />
       </section>
       <section id="contact">
         <h2>Contact us</h2>

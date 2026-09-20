@@ -8,6 +8,9 @@ section#panel {
     align-items:flex-end;
     flex-direction: column;
     height: 100%;
+    // The page behind stays scrollable, so the panel owns its own scroll
+    // region: long bios stay reachable and a wheel over the panel scrolls it.
+    overflow-y: auto;
     width: 100%;
     max-width: calc(100% - 45px);
     top: 0;
@@ -15,7 +18,36 @@ section#panel {
     background-color: var(--espresso);
     color: var(--linen);
     padding-top: 30px;
-    
+
+    opacity: 0;
+    visibility: hidden;
+    // Staggered visibility keeps the panel un-clickable once faded out
+    // without cutting the fade short.
+    transition: opacity .3s ease, visibility 0s linear .3s;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity .3s ease, visibility 0s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &, &.active {
+            transition-duration: 0s;
+        }
+    }
+
+    // Scrim over the page. Lives on the panel so it inherits the same
+    // opacity transition; z-index is relative to the panel's own stacking
+    // context, so it paints behind the panel but above the page.
+    &::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-color: rgba(0, 0, 0, .25);
+    }
+
     @media screen and (min-width: 769px) {
         width: 33%;
     }
@@ -58,16 +90,4 @@ section#panel {
 
 
 
-}
-
-body:has(section#panel.active):after {
-    content: '';
-    display: block;
-    position: fixed;
-    z-index: 75;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .25);
 }
