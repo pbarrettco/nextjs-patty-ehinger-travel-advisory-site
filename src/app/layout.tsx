@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/sass/index.scss";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Panel from "@/components/Panel";
 
 export const metadata: Metadata = {
   title: "Patty Ehinger Luxury Travel Advisory",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <Header />
         {children}
+        <Panel />
         <Footer />
       </body>
     </html>

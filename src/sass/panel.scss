@@ -1,0 +1,73 @@
+@use './fonts.scss';
+
+section#panel {
+
+    position: fixed;
+    right: 0;
+    display: flex;
+    align-items:flex-end;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: calc(100% - 45px);
+    top: 0;
+    z-index: 100;
+    background-color: var(--espresso);
+    color: var(--linen);
+    padding-top: 30px;
+    
+    @media screen and (min-width: 769px) {
+        width: 33%;
+    }
+
+    button {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+
+        display: block;
+        width: 30px;
+        height: 30px;
+        text-indent: -9999em;
+        background-image: url("data:image/svg+xml,%3Csvg width='23' height='22' viewBox='0 0 23 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1.41406' width='30' height='1' transform='rotate(45 1.41406 0)' fill='%23FAF8E8'/%3E%3Crect x='21.9199' y='0.707153' width='30' height='0.999999' transform='rotate(135 21.9199 0.707153)' fill='%23FAF8E8'/%3E%3C/svg%3E%0A");
+        background-position: center center;
+        background-repeat: no-repeat;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    h3, p {
+        width: 100%;
+        text-wrap: pretty;
+    }
+
+    h3 {
+        @extend .subheader;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: .5rem;
+    }
+
+
+
+}
+
+body:has(section#panel.active):after {
+    content: '';
+    display: block;
+    position: fixed;
+    z-index: 75;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .25);
+}

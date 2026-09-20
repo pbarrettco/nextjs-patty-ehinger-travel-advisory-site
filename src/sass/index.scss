@@ -3,6 +3,7 @@
 @use './global.scss';
 @use './header.scss';
 @use './footer.scss';
+@use './panel.scss';
 
 *,
 *::before,
@@ -124,6 +125,73 @@ section#about {
 
 section#our-team {
     border-top: 1px solid var(--espresso);
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 769px) {
+        flex-direction: row;
+        align-items: center;
+        height: 700px;
+    }
+
+    div {
+        display: block;
+        width: 40%;
+        color: var(--espresso);
+        h2 {
+            @extend .eyebrow;
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            @extend .subheader;
+            margin-bottom: 1rem;
+        }
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding: 0;
+        width: 60%;
+
+        @media screen and (min-width: 760px) {
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        li {
+            display: block;
+            width: 40%;
+
+            &:hover {
+                cursor: pointer;
+                .link-text {
+                    text-decoration-color: var(--espresso);
+                    transition: text-decoration-color .3s ease;
+                    text-underline-offset: 2px;
+                }
+            }
+            img {
+                width: 100%;
+                aspect-ratio: 1/1.25;
+                height: auto;
+            }
+            h3 {
+                @extend .utility;
+                margin-top: .5rem;
+            }
+            p {
+                @extend .utility;
+                font-weight: 400;
+            }
+            p.link-text {
+                margin-top: .25rem;
+                text-decoration: underline;
+                text-decoration-color: transparent;
+                transition: text-decoration-color .1s ease;
+            }
+        }
+    }
 }
 
 section#contact{

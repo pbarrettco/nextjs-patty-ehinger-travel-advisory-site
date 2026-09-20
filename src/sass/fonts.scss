@@ -80,6 +80,22 @@
     }
 }
 
+.subheader {
+    font-family: var(--font-aime);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.4375rem;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @media screen and (min-width: 769px) {
+        font-size: 1.625rem;
+    }
+}
+
+
 .eyebrow {
     font-family: var(--font-cera);
     font-weight: 500;
@@ -108,4 +124,12 @@
         line-height: 140%;
         letter-spacing: 0.15em;
         text-transform: uppercase;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
