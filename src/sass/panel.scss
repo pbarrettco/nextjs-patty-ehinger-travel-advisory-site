@@ -3,13 +3,11 @@
 section#panel {
 
     position: fixed;
-    right: 0;
     display: flex;
+    right: calc(calc(100% - 45px) * -1);
     align-items:flex-end;
     flex-direction: column;
     height: 100%;
-    // The page behind stays scrollable, so the panel owns its own scroll
-    // region: long bios stay reachable and a wheel over the panel scrolls it.
     overflow-y: auto;
     width: 100%;
     max-width: calc(100% - 45px);
@@ -21,14 +19,14 @@ section#panel {
 
     opacity: 0;
     visibility: hidden;
-    // Staggered visibility keeps the panel un-clickable once faded out
-    // without cutting the fade short.
-    transition: opacity .3s ease, visibility 0s linear .3s;
+    
+    transition: opacity .2s ease, visibility 0s linear .3s, right .3s ease;
 
     &.active {
         opacity: 1;
         visibility: visible;
-        transition: opacity .3s ease, visibility 0s;
+        transition: opacity .2s ease, visibility 0s, right .3s ease;
+        right: 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -50,6 +48,7 @@ section#panel {
 
     @media screen and (min-width: 769px) {
         width: 33%;
+        right: -33%;
     }
 
     button {
