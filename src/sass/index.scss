@@ -4,6 +4,7 @@
 @use './header.scss';
 @use './footer.scss';
 @use './panel.scss';
+@use './videoBlock.scss';
 
 *,
 *::before,
@@ -139,17 +140,23 @@ section#our-team {
     border-top: 1px solid var(--espresso);
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 
     @media screen and (min-width: 769px) {
         flex-direction: row;
         align-items: center;
         height: 700px;
+        gap: unset;
     }
 
     div {
         display: block;
-        width: 40%;
         color: var(--espresso);
+        gap: 2rem;
+
+        @media screen and (min-width: 769px) {
+            width: 40%;
+        }
         h2 {
             @extend .eyebrow;
             margin-bottom: 1.5rem;
@@ -164,16 +171,20 @@ section#our-team {
         flex-direction: row;
         list-style-type: none;
         padding: 0;
-        width: 60%;
+        gap: 1rem;
 
         @media screen and (min-width: 760px) {
             justify-content: flex-end;
             gap: 1rem;
+            width: 60%;
         }
 
         li {
             display: block;
-            width: 40%;
+            
+            @media screen and (min-width: 769px) {
+                width: 40%;
+            }
 
             &:hover {
                 cursor: pointer;

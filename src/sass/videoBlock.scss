@@ -1,0 +1,25 @@
+figure.video-block {
+    position: absolute;
+    inset: 0;
+    display: block;
+    z-index: -50;
+    margin: 0;
+
+    img, video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, .3);
+        width: 100%;
+        height: 100%;
+    }
+}
