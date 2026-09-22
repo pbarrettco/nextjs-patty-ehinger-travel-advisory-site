@@ -111,8 +111,8 @@ export default function Header() {
         <header className={state}>
             <h1><Link href="/">Patty Ehinger Luxury Travel Advisory</Link></h1>
             <nav>
-                <Link href="#about">About</Link>
-                <Link href="#our-team">Our Team</Link>
+                <Link className="desktop" href="#about">About</Link>
+                <Link className="desktop" href="#our-team">Our Team</Link>
                 <Link href="#contact">Contact</Link>
             </nav>
         </header>
