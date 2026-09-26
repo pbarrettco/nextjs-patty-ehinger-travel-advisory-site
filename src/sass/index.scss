@@ -218,6 +218,42 @@ section#our-team {
     }
 }
 
+section#careers{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--linen);
+    color: var(--espresso);
+    border-top: 1px solid var(--espresso);
+
+    @media screen and (max-width: 768px) {
+        height: 100dvw;
+    }
+
+    @media screen and (min-width: 769px) {
+        text-align: center;
+        height: 600px;
+    }
+
+    a {
+        @extend .header;
+        max-width: 980px;
+        color: var(--espresso);
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+        text-decoration-color: transparent;
+        transition: text-decoration-color .1s ease;
+
+        &:hover {
+            text-decoration-color: var(--espresso);
+            transition: text-decoration-color .1s ease;
+        }
+    }
+}
+
 section#contact{
     display: flex;
     flex-direction: column;

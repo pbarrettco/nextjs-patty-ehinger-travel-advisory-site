@@ -66,6 +66,11 @@ export default async function IndexPage() {
         </div>
         <TeamGrid members={members} />
       </section>
+      <section id="careers">
+        <h2>Careers</h2>
+        <p>We're currently hiring for the following roles:</p>
+        <a href="#careers">Test Role</a>
+      </section>
       <section id="contact">
         <h2>Contact us</h2>
         <a href="mailto:patty.ehinger@localforeigner.com" target="_blank" rel="noopener noreferrer">patty.ehinger@localforeigner.com</a>

@@ -19,6 +19,7 @@ type HeaderState = "" | "active" | "hidden";
 export default function Header() {
     // "" is the transparent-over-hero state, and what the server renders.
     const [state, setState] = useState<HeaderState>("");
+    const [menuOpen, setMenuOpen] = useState(false);
     const lastY = useRef(0);
     const hovering = useRef(false);
     const frame = useRef<number | null>(null);
@@ -107,14 +108,69 @@ export default function Header() {
         };
     }, []);
 
+    useEffect(() => {
+        if (!menuOpen) return;
+
+        // Scrolling behind the open menu would still drive the header state,
+        // and a downward scroll hides the header — taking the close button
+        // off-screen with it.
+        const root = document.documentElement;
+        root.style.overflow = "hidden";
+
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setMenuOpen(false);
+        };
+        // Past the breakpoint the nav is inline again, but the scroll lock
+        // would outlive it.
+        const desktop = window.matchMedia("(min-width: 769px)");
+        const onBreakpoint = (e: MediaQueryListEvent) => {
+            if (e.matches) setMenuOpen(false);
+        };
+
+        document.addEventListener("keydown", onKeyDown);
+        desktop.addEventListener("change", onBreakpoint);
+
+        return () => {
+            root.style.overflow = "";
+            document.removeEventListener("keydown", onKeyDown);
+            desktop.removeEventListener("change", onBreakpoint);
+        };
+    }, [menuOpen]);
+
     return (
         <header className={state}>
             <h1><Link href="/">Patty Ehinger Luxury Travel Advisory</Link></h1>
-            <nav>
-                <Link className="desktop" href="#about">About</Link>
-                <Link className="desktop" href="#our-team">Our Team</Link>
+            <nav
+                id="mainNav"
+                className={menuOpen ? "active" : undefined}
+                // Every item is an in-page anchor or a new tab, so any link
+                // tap should dismiss the overlay.
+                onClick={(e) => {
+                    if ((e.target as HTMLElement).closest("a")) setMenuOpen(false);
+                }}
+            >
+                <Link href="#about">About</Link>
+                <Link href="#our-team">Our Team</Link>
+                <Link href="#careers">Careers</Link>
                 <Link href="#contact">Contact</Link>
+                <Link href="https://portal.pattyehingertravel.com" target="_blank" rel="noopener noreferrer">Client Portal</Link>
             </nav>
+            <button
+                id="mobileMenu"
+                aria-controls="mainNav"
+                aria-expanded={menuOpen}
+                onClick={() => {
+                    if (!menuOpen && window.location.hash) {
+                        // Tapping a link whose hash is already in the URL is a
+                        // no-op navigation; clearing it makes every menu link fire.
+                        const { pathname, search } = window.location;
+                        window.history.replaceState(null, "", pathname + search);
+                    }
+                    setMenuOpen((open) => !open);
+                }}
+            >
+                {menuOpen ? "Close" : "Menu"}
+            </button>
         </header>
     );
 }

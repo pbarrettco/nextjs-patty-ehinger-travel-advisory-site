@@ -50,9 +50,31 @@ header {
     }
 
     nav {
-        display: flex;
-        flex-direction: row;
-        gap: 30px;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+
+            &.active {
+                display: flex;
+                gap: 30px;
+                flex-direction: column;
+                position: fixed;
+                z-index: 200;
+                background-color: var(--linen);
+                margin: 0;
+                inset: 0;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
+        
+        @media screen and (min-width: 769px) {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+
     }
 
     nav a {
@@ -63,6 +85,11 @@ header {
         text-decoration-thickness: 1.5px;
         text-underline-offset: 3px;
         transition: color .3s ease, text-decoration-color .1s ease;
+
+        @media screen and (max-width: 768px) {
+            color: var(--espresso);
+            font-size: 1rem;
+        }
 
         &:hover {
             text-decoration-color: var(--cotton);
@@ -75,7 +102,8 @@ header {
     // slides back in as .active — no flash on return.
     &.active,
     &.hidden {
-        h1 a {
+        h1 a,
+        button#mobileMenu {
             background-color: var(--espresso);
         }
 
@@ -87,12 +115,40 @@ header {
             }
         }
     }
+
+    button#mobileMenu {
+        all: unset;
+        display: block;
+        width: 20px;
+        height: 11px;
+        text-indent: -9999rem;
+        mask: url("data:image/svg+xml,%3Csvg width='20' height='11' viewBox='0 0 20 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='20' height='1' fill='%23FAF8E8'/%3E%3Crect y='5' width='20' height='1' fill='%23FAF8E8'/%3E%3Crect y='10' width='20' height='1' fill='%23FAF8E8'/%3E%3C/svg%3E%0A") no-repeat center center;
+        mask-size: contain;
+        background-color: var(--cotton);
+        transition: background-color .3s ease;
+        // Above the open nav overlay (z-index 200) so it can close it.
+        position: relative;
+        z-index: 201;
+
+        // Open menu sits on linen at any scroll depth, including the top.
+        // Follows the .active/.hidden rule above at equal specificity, so
+        // source order lets it win.
+        &[aria-expanded="true"] {
+            background-color: var(--espresso);
+            mask-image: url("data:image/svg+xml,%3Csvg width='20' height='11' viewBox='0 0 20 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1.58984' y='0.066988' width='20' height='1' transform='rotate(30 1.58984 0.066988)' fill='%23FAF8E8'/%3E%3Crect x='1.08984' y='10.067' width='20' height='1' transform='rotate(-30 1.08984 10.067)' fill='%23FAF8E8'/%3E%3C/svg%3E%0A");
+        }
+
+        @media screen and (min-width: 769px) {
+            display: none;
+        }
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     header,
     header h1 a,
-    header nav a {
+    header nav a,
+    header button#mobileMenu {
         transition: none;
     }
 }
