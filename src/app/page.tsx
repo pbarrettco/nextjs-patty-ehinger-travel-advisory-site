@@ -76,8 +76,8 @@ export default async function IndexPage() {
       <section id="our-team">
         <div>
           <h2>Meet our team</h2>
-          <h3>“I've spent years building this practice around a simple belief: that travel is one of the most meaningful ways we spend our time, and that planning it beautifully takes real care and expertise.</h3>
-          <p>My team and I work with a limited number of clients so that every journey receives the attention it deserves, and everything we recommend is grounded in firsthand experience. We're constantly traveling ourselves, staying in the hotels we recommend, meeting the guides we rely on, and deepening the partner relationships that enable us to open doors for our clients, including our affiliation with Local Foreigner.” — Patty</p>
+          <h3>“I&rsquo;ve spent years building this practice around a simple belief: that travel is one of the most meaningful ways we spend our time, and that planning it beautifully takes real care and expertise.</h3>
+          <p>My team and I work with a limited number of clients so that every journey receives the attention it deserves, and everything we recommend is grounded in firsthand experience. We&rsquo;re constantly traveling ourselves, staying in the hotels we recommend, meeting the guides we rely on, and deepening the partner relationships that enable us to open doors for our clients, including our affiliation with Local Foreigner.” — Patty</p>
         </div>
         <TeamGrid members={members} />
       </section>
@@ -85,13 +85,13 @@ export default async function IndexPage() {
         <h2>Careers</h2>
         {careers.length > 0 ? (
           <>
-            <p>We're currently hiring for the following roles:</p>
+            <p>We&rsquo;re currently hiring for the following roles:</p>
             {careers.map((role) => (
               <Link key={role._id} href={`/careers/${role.slug}`}>{role.jobTitle}</Link>
             ))}
           </>
         ) : (
-          <p>We don't have any open roles right now. Please check back soon.</p>
+          <p>We don&rsquo;t have any open roles right now. Please check back soon.</p>
         )}
       </section>
       <section id="contact">

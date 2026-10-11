@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withBotId } from "botid/next/config";
 
 const nextConfig: NextConfig = {
   images: {
@@ -9,6 +10,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.feedframer.com" },
     ],
   },
+  experimental: {
+    serverActions: {
+      // Job applications post a resume (max 4MB) through a Server Action.
+      // Vercel functions cap request bodies at 4.5MB, so this is the ceiling.
+      bodySizeLimit: "4.5mb",
+    },
+  },
 };
 
-export default nextConfig;
+export default withBotId(nextConfig);

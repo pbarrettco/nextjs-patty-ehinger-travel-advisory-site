@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { PortableText, type PortableTextBlock } from "next-sanity";
 
+import ApplicationForm from "@/components/ApplicationForm";
+
 import { client } from "../../sanity/client";
 
 type CareersPosting = {
@@ -41,6 +43,7 @@ export default async function CareersPostingPage(props: PageProps<"/careers/[slu
             <section className="careers-posting">
                 <h1>{post.jobTitle}</h1>
                 {post.jobDescription && <PortableText value={post.jobDescription} />}
+                <ApplicationForm slug={post.slug} jobTitle={post.jobTitle} />
             </section>
         </main>
     )

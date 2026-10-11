@@ -12,10 +12,12 @@
     "@sanity/image-url": "^2.1.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
+    "botid": "^1.5.11",
     "next": "16.3.5",
     "next-sanity": "^13.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "resend": "^6.32.1",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
