@@ -3,6 +3,7 @@ import { type SanityDocument } from "next-sanity";
 
 import { client } from "./sanity/client";
 import { urlFor } from "./sanity/image";
+import { getCareers } from "./sanity/careers";
 import TeamGrid, { type TeamMember } from "@/components/TeamGrid";
 import SocialFeed from "@/components/SocialFeed";
 import VideoBlock from "@/components/VideoBlock";
@@ -22,23 +23,12 @@ const POSTS_QUERY = `*[
   bio,
 }`;
 
-const CAREERS_QUERY = `*[
-  _type == "careersPosting"
-  && defined(slug.current)
-]|order(jobTitle asc){
-  _id,
-  jobTitle,
-  "slug": slug.current,
-}`;
-
-type CareersListing = { _id: string; jobTitle: string; slug: string };
-
 const options = { next: {revalidate: 30 } };
 
 export default async function IndexPage() {
   const [posts, careers] = await Promise.all([
     client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options),
-    client.fetch<CareersListing[]>(CAREERS_QUERY, {}, options),
+    getCareers(),
   ]);
 
   // Flatten to plain serializable props so urlFor/@sanity/image-url stays
@@ -81,19 +71,15 @@ export default async function IndexPage() {
         </div>
         <TeamGrid members={members} />
       </section>
-      <section id="careers">
-        <h2>Careers</h2>
-        {careers.length > 0 ? (
-          <>
-            <p>We&rsquo;re currently hiring for the following roles:</p>
-            {careers.map((role) => (
-              <Link key={role._id} href={`/careers/${role.slug}`}>{role.jobTitle}</Link>
-            ))}
-          </>
-        ) : (
-          <p>We don&rsquo;t have any open roles right now. Please check back soon.</p>
-        )}
-      </section>
+      {careers.length > 0 && (
+        <section id="careers">
+          <h2>Careers</h2>
+          <p>We&rsquo;re currently hiring for the following roles:</p>
+          {careers.map((role) => (
+            <Link key={role._id} href={`/careers/${role.slug}`}>{role.jobTitle}</Link>
+          ))}
+        </section>
+      )}
       <section id="contact">
         <h2>Contact us</h2>
         <a href="mailto:patty.ehinger@localforeigner.com" target="_blank" rel="noopener noreferrer">patty.ehinger@localforeigner.com</a>

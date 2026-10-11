@@ -17,7 +17,7 @@ const HOVER_EXIT_DELAY = 250;
 
 type HeaderState = "" | "active" | "hidden";
 
-export default function Header() {
+export default function Header({ showCareers }: { showCareers: boolean }) {
     // "" means the page is in the top zone, and is what the server renders.
     // It's drawn as restState, which is transparent over the hero by default.
     const [state, setState] = useState<HeaderState>("");
@@ -157,7 +157,7 @@ export default function Header() {
             >
                 <Link href="/#about">About</Link>
                 <Link href="/#our-team">Our Team</Link>
-                <Link href="/#careers">Careers</Link>
+                {showCareers && <Link href="/#careers">Careers</Link>}
                 <Link href="/#contact">Contact</Link>
                 <Link href="https://portal.pattyehingertravel.com" target="_blank" rel="noopener noreferrer">Client Portal</Link>
             </nav>
