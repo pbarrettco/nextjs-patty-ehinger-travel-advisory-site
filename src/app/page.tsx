@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
 
 import { client } from "./sanity/client";
@@ -21,10 +22,24 @@ const POSTS_QUERY = `*[
   bio,
 }`;
 
+const CAREERS_QUERY = `*[
+  _type == "careersPosting"
+  && defined(slug.current)
+]|order(jobTitle asc){
+  _id,
+  jobTitle,
+  "slug": slug.current,
+}`;
+
+type CareersListing = { _id: string; jobTitle: string; slug: string };
+
 const options = { next: {revalidate: 30 } };
 
 export default async function IndexPage() {
-  const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+  const [posts, careers] = await Promise.all([
+    client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options),
+    client.fetch<CareersListing[]>(CAREERS_QUERY, {}, options),
+  ]);
 
   // Flatten to plain serializable props so urlFor/@sanity/image-url stays
   // out of the client bundle.
@@ -68,8 +83,16 @@ export default async function IndexPage() {
       </section>
       <section id="careers">
         <h2>Careers</h2>
-        <p>We're currently hiring for the following roles:</p>
-        <a href="#careers">Test Role</a>
+        {careers.length > 0 ? (
+          <>
+            <p>We're currently hiring for the following roles:</p>
+            {careers.map((role) => (
+              <Link key={role._id} href={`/careers/${role.slug}`}>{role.jobTitle}</Link>
+            ))}
+          </>
+        ) : (
+          <p>We don't have any open roles right now. Please check back soon.</p>
+        )}
       </section>
       <section id="contact">
         <h2>Contact us</h2>

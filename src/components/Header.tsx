@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 // Below this scroll depth the header stays transparent over the hero photo.
@@ -17,8 +18,13 @@ const HOVER_EXIT_DELAY = 250;
 type HeaderState = "" | "active" | "hidden";
 
 export default function Header() {
-    // "" is the transparent-over-hero state, and what the server renders.
+    // "" means the page is in the top zone, and is what the server renders.
+    // It's drawn as restState, which is transparent over the hero by default.
     const [state, setState] = useState<HeaderState>("");
+    const pathname = usePathname();
+    // Careers postings have no hero to sit transparently over, so the
+    // top-of-page state is the solid bar instead.
+    const restState: HeaderState = pathname.startsWith("/careers/") ? "active" : "";
     const [menuOpen, setMenuOpen] = useState(false);
     const lastY = useRef(0);
     const hovering = useRef(false);
@@ -138,7 +144,7 @@ export default function Header() {
     }, [menuOpen]);
 
     return (
-        <header className={state}>
+        <header className={state === "" ? restState : state}>
             <h1><Link href="/">Patty Ehinger Luxury Travel Advisory</Link></h1>
             <nav
                 id="mainNav"
@@ -149,10 +155,10 @@ export default function Header() {
                     if ((e.target as HTMLElement).closest("a")) setMenuOpen(false);
                 }}
             >
-                <Link href="#about">About</Link>
-                <Link href="#our-team">Our Team</Link>
-                <Link href="#careers">Careers</Link>
-                <Link href="#contact">Contact</Link>
+                <Link href="/#about">About</Link>
+                <Link href="/#our-team">Our Team</Link>
+                <Link href="/#careers">Careers</Link>
+                <Link href="/#contact">Contact</Link>
                 <Link href="https://portal.pattyehingertravel.com" target="_blank" rel="noopener noreferrer">Client Portal</Link>
             </nav>
             <button

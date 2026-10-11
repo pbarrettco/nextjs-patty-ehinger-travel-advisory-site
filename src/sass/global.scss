@@ -21,3 +21,10 @@
         display: none!important;
     }
 }
+
+a.external {
+    &::after {
+        content: '';
+        display: block;
+    }
+}

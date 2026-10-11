@@ -133,3 +133,7 @@ p {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+p strong, li strong {
+    font-weight: 500;
+}

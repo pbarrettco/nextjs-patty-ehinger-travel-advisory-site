@@ -1,0 +1,35 @@
+@use './fonts.scss';
+
+section.careers-posting {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 160px 1rem 4rem;
+    color: var(--espresso);
+
+    h1 {
+        @extend .header;
+    }
+
+    h2, h3, h4, h5, h6 {
+        font-family: var(--font-cera);
+        @extend .eyebrow;
+        margin-bottom: .5rem;
+        margin-top: 2rem;
+    }
+
+    p, li {
+        font-size: 1rem;
+        line-height: 1.4;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1 {
+        margin-bottom: 2rem;
+    }
+
+    p + p {
+        margin-top: .5rem;
+    }
+}
