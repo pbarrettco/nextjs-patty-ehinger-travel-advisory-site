@@ -134,7 +134,7 @@ export async function submitApplication(
         const resend = new Resend(RESEND_API_KEY);
         const { error } = await resend.emails.send({
             from: CAREERS_FROM_EMAIL,
-            to: CAREERS_TO_EMAIL,
+            to: CAREERS_TO_EMAIL.split(",").map((address) => address.trim()).filter(Boolean),
             replyTo: values.email,
             subject: `Application: ${jobTitle} — ${values.name}`,
             text,
