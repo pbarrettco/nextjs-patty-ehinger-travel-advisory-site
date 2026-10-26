@@ -51,13 +51,11 @@ export default async function IndexPage() {
           <h1>Luxury Travel Advisor</h1>
           <p>A considered practice <i>for the way you travel.</i></p>
         </hgroup>
-        <VideoBlock />
-        { /* }
+        { /* <VideoBlock /> */ }
         <picture>
           <source media="(min-width: 769px)" srcSet="/hero_d@2x.jpg" width="1400" height="700" />
           <img src="/hero_m@2x.jpg" alt="Image of a woman relaxing on vacation" width="390" height="702" />
         </picture>
-        { */ }
       </section>
       <section id="about">
         <h2>About</h2>

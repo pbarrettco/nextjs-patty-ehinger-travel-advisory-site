@@ -174,18 +174,21 @@ section#our-team {
         list-style-type: none;
         padding: 0;
         gap: 1rem;
+        flex-wrap: wrap;
 
         @media screen and (min-width: 760px) {
             justify-content: flex-end;
             gap: 1rem;
             width: 60%;
+            flex-wrap: nowrap;
         }
 
         li {
             display: block;
+            width: calc(calc(100% - 1rem) / 2);
             
             @media screen and (min-width: 769px) {
-                width: 40%;
+                width: 30%;
             }
 
             &:hover {
