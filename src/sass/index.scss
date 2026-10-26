@@ -142,13 +142,19 @@ section#our-team {
     border-top: 1px solid var(--espresso);
     display: flex;
     flex-direction: column;
+    padding-top: 60px;
+    padding-bottom: 60px;
     gap: 1rem;
 
     @media screen and (min-width: 769px) {
         flex-direction: row;
         align-items: center;
-        height: 700px;
+        min-height: 700px;
         gap: unset;
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1199px) {
+        justify-content: space-between;
     }
 
     div {
@@ -176,7 +182,14 @@ section#our-team {
         gap: 1rem;
         flex-wrap: wrap;
 
-        @media screen and (min-width: 760px) {
+        @media screen and (min-width: 770px) and (max-width: 1199px) {
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 48%;
+        }
+
+
+        @media screen and (min-width: 1200px) {
             justify-content: flex-end;
             gap: 1rem;
             width: 60%;
@@ -186,8 +199,16 @@ section#our-team {
         li {
             display: block;
             width: calc(calc(100% - 1rem) / 2);
+
+            @media screen and (min-width: 770px) and (max-width: 920px) {
+                width: 40%;
+            }
+
+            @media screen and (min-width: 921px) and (max-width: 1199px) {
+                width: 48%;
+            }
             
-            @media screen and (min-width: 769px) {
+            @media screen and (min-width: 1200px) {
                 width: 30%;
             }
 
