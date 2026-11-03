@@ -11,7 +11,7 @@ import VideoBlock from "@/components/VideoBlock";
 const POSTS_QUERY = `*[
   _type == "bio"
   && defined(name)
-]|order(name desc)[0...12]{
+]|order(_createdAt asc)[0...12]{
   _id,
   name,
   jobTitle,
